@@ -11,11 +11,14 @@ namespace _03._Extract_File
             string fileName = string.Empty;
             string extension = string.Empty;
 
-            int fileNameIndex = path.LastIndexOf("\\");
-            int extensionIndex = path.LastIndexOf(".");
+            int lastSeparatorIndex = path.LastIndexOf("\\");
+            int extensionIndex = path.LastIndexOf('.');
 
-            fileName = path.Substring(fileNameIndex + 1,extensionIndex-fileNameIndex - 1);
-            extension = path.Substring(extensionIndex + 1);
+            if (lastSeparatorIndex != -1 && extensionIndex != -1 && extensionIndex > lastSeparatorIndex)
+            {
+                fileName = path.Substring(lastSeparatorIndex + 1, extensionIndex - lastSeparatorIndex - 1);
+                extension = path.Substring(extensionIndex + 1);
+            }
 
             Console.WriteLine($"File name: {fileName}");
             Console.WriteLine($"File extension: {extension}");
